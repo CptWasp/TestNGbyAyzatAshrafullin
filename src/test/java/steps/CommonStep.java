@@ -3,6 +3,10 @@ package steps;
 import org.testng.annotations.Test;
 import pageObjects.CommonPage;
 
+/**
+ * Сценарий для проверки калькулятора на странице google.com
+ */
+
 public class CommonStep extends Hooks {
 
     CommonPage commonPage = new CommonPage(driver);
