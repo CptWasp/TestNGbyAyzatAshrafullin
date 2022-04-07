@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="unit tests" configfailurepolicy="continue" parallel="classes" thread-count="5">
+    <test name="unit test">
+        <groups>
+            <run>
+                <include name="google.com calculator"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="steps.CommonStep"></class>
+        </classes>
+    </test>
+</suite>
