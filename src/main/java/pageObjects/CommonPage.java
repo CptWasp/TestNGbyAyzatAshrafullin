@@ -157,10 +157,10 @@ public class CommonPage extends AbstractPage {
         String errorMessage = String.format("[ОШИБКА]: Ожидаемый результат не совпадает с фактическим, " +
                 "ожидалось - [%s], фактический результат - [%s]", expectedResult, result.getText());
 
-        String errorMessageResultnotFind = String.format("[ОШИБКА]: Ожидаемое поле по локатору [%s] не было найдено",
+        String errorMessageResultNotFind = String.format("[ОШИБКА]: Ожидаемое поле по локатору [%s] не было найдено",
                 RESULT_XPATH);
 
-        Assert.assertTrue(result.isDisplayed(), errorMessageResultnotFind);
+        Assert.assertTrue(result.isDisplayed(), errorMessageResultNotFind);
         Assert.assertTrue(result.getText().equals(String.valueOf(expectedResult)), errorMessage);
     }
 
