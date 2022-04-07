@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.time.Duration;
+
 public class CommonPage extends AbstractPage {
 
     public CommonPage(WebDriver driver){
@@ -91,8 +93,8 @@ public class CommonPage extends AbstractPage {
     public void searchingTheWord(String theSearchWord){
         String errorElementIsEqualTexts = "[ОШИБКА]: Вводимый текст и отображаемый текст не отличаются";
 
-        WebElement searchInput = driver.findElement(By.xpath(SEARCH_INPUT_XPATH));
-        WebElement searchInputKendo = driver.findElement(By.xpath(SEARCH_INPUT_XPATH));
+        WebElement searchInput = findByXpath(SEARCH_INPUT_XPATH, Duration.ofSeconds(10));
+        WebElement searchInputKendo = findByXpath(SEARCH_INPUT_XPATH, Duration.ofSeconds(10));
 
         searchInputKendo.click();
 
@@ -100,7 +102,7 @@ public class CommonPage extends AbstractPage {
         searchInput.sendKeys(Keys.ENTER);
 
         // новый элемент на странице
-        String searchInputLabelTest = driver.findElement(By.xpath(SEARCH_INPUT_XPATH)).getAttribute("value");
+        String searchInputLabelTest = findByXpath(SEARCH_INPUT_XPATH, Duration.ofSeconds(10)).getAttribute("value");
         Assert.assertTrue(searchInputLabelTest.equals(theSearchWord), errorElementIsEqualTexts);
     }
 
@@ -111,12 +113,12 @@ public class CommonPage extends AbstractPage {
     public void checkCalculator(){
         String errorElementIsNotInPage = "[ОШИБКА]: элемент [Калькулятор] не отображается на странице";
 
-        WebElement calculatorDisplay = driver.findElement(By.xpath(CALCULATOR_INPUT_DISPLAY_XPATH));
-        WebElement calculatorSummButton = driver.findElement(By.xpath(CALCULATOR_SUMM_BUTTON_XPATH));
-        WebElement calculatorDivButton = driver.findElement(By.xpath(CALCULATOR_DIV_BUTTON_XPATH));
-        WebElement calculatorMultiplyButton = driver.findElement(By.xpath(CALCULATOR_MULTIPLY_BUTTON_XPATH));
-        WebElement calculatorMinusButton = driver.findElement(By.xpath(CALCULATOR_MINUS_BUTTON_XPATH));
-        WebElement calculatorEqualsButton = driver.findElement(By.xpath(CALCULATOR_EQUALS_BUTTON_XPATH));
+        WebElement calculatorDisplay = findByXpath(CALCULATOR_INPUT_DISPLAY_XPATH, Duration.ofSeconds(10));
+        WebElement calculatorSummButton = findByXpath(CALCULATOR_SUMM_BUTTON_XPATH, Duration.ofSeconds(10));
+        WebElement calculatorDivButton = findByXpath(CALCULATOR_DIV_BUTTON_XPATH, Duration.ofSeconds(10));
+        WebElement calculatorMultiplyButton = findByXpath(CALCULATOR_MULTIPLY_BUTTON_XPATH, Duration.ofSeconds(10));
+        WebElement calculatorMinusButton = findByXpath(CALCULATOR_MINUS_BUTTON_XPATH, Duration.ofSeconds(10));
+        WebElement calculatorEqualsButton = findByXpath(CALCULATOR_EQUALS_BUTTON_XPATH, Duration.ofSeconds(10));
 
         Assert.assertTrue(calculatorSummButton.isDisplayed(), errorElementIsNotInPage);
         Assert.assertTrue(calculatorDivButton.isDisplayed(), errorElementIsNotInPage);
@@ -132,18 +134,18 @@ public class CommonPage extends AbstractPage {
      * нажимаем (равно), ожидаем ответ
      */
     public void doRequiredExpression(){
-        driver.findElement(By.xpath(CALCULATOR_FOUR_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_MULTIPLY_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_OPEN_BRACKETS_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_FIVE_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_SUMM_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_SIX_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_CLOSE_BRACKETS_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_DIV_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_TWO_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_SUMM_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_EIGHT_BUTTON_XPATH)).click();
-        driver.findElement(By.xpath(CALCULATOR_EQUALS_BUTTON_XPATH)).click();
+        findByXpath(CALCULATOR_FOUR_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_MULTIPLY_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_OPEN_BRACKETS_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_FIVE_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_SUMM_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_SIX_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_CLOSE_BRACKETS_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_DIV_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_TWO_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_SUMM_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_EIGHT_BUTTON_XPATH, Duration.ofSeconds(10)).click();
+        findByXpath(CALCULATOR_EQUALS_BUTTON_XPATH, Duration.ofSeconds(10)).click();
     }
 
     /**
@@ -152,7 +154,7 @@ public class CommonPage extends AbstractPage {
      * @param expectedResult ожидаемый результат
      */
     public void validateResult(int expectedResult){
-        WebElement result = driver.findElement(By.xpath(RESULT_XPATH));
+        WebElement result = findByXpath(RESULT_XPATH, Duration.ofSeconds(10));
 
         String errorMessage = String.format("[ОШИБКА]: Ожидаемый результат не совпадает с фактическим, " +
                 "ожидалось - [%s], фактический результат - [%s]", expectedResult, result.getText());

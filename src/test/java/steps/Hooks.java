@@ -17,28 +17,16 @@ public class Hooks {
 
     protected WebDriver driver = DriverManager.getDriver();
 
-
-//    @BeforeTest
-//    /**
-//     * Код, который будет выполняться до каждого сценария.
-//     * Настраиваем профиль и поведение нового экземпляра WebDriver.
-//     * Чистим все, что можем очистить чтобы избежать общего состояния между выполнением тестов.
-//     */
-//    public void beforeTest() throws UnknownHostException {
-//
-//    }
-
     @AfterTest
     /**
      * Код, который будет выполняться после каждого сценария.
-     * Встраиваем скриншот в тестовый отчет, если тест завершен аварийно.
+     * Делаем скриншот страницы.
      */
     public void afterTest() throws Exception {
         // Получаем скриншот страницы где произошла остановка
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File(".\\screenshot.png"));
 
-        driver.close();
-        driver.quit();
+        DriverManager.closeWebDriver();
     }
 }
