@@ -20,7 +20,8 @@ public class CommonStep extends Hooks {
          commonPage.openPage(url);
      }
 
-     @Test(description = "В строке поиска ввести слово 'калькулятор'",  groups = "google.com calculator", priority = 2)
+     @Test(description = "В строке поиска ввести слово 'калькулятор'",  groups = "google.com calculator", priority = 2,
+             dependsOnMethods = "userGoToUrl")
      public void typingCalcWordInSearchInput(){
          String theSearchWord = "калькулятор";
          String stepName = String.format("[ИНФОРМАЦИЯ]: В строке поиска ввести слово '%s'", theSearchWord);
@@ -29,7 +30,8 @@ public class CommonStep extends Hooks {
          commonPage.searchingTheWord(theSearchWord);
      }
 
-     @Test(description = "Проверить наличие калькулятора на экране", groups = "google.com calculator", priority = 3)
+     @Test(description = "Проверить наличие калькулятора на экране", groups = "google.com calculator", priority = 3,
+             dependsOnMethods = "typingCalcWordInSearchInput")
      public void checkCalculatorInPage(){
          String stepName = "[ИНФОРМАЦИЯ]: На странице проверяем наличие калькулятора";
          System.out.println(stepName);
@@ -38,7 +40,7 @@ public class CommonStep extends Hooks {
      }
 
      @Test(description = "Используя нажатия клавиш калькулятора ввести требуемое выражение",
-             groups = "google.com calculator", priority = 4)
+             groups = "google.com calculator", priority = 4, dependsOnMethods = "checkCalculatorInPage")
      public void doRequiredExpressionOnCalculator(){
          String stepName = "[ИНФОРМАЦИЯ]: Используя нажатия клавиш калькулятора ввести требуемое выражение";
          System.out.println(stepName);
@@ -46,7 +48,8 @@ public class CommonStep extends Hooks {
          commonPage.doRequiredExpression();
      }
 
-     @Test(description = "Проверить правильность результата",  groups = "google.com calculator", priority = 5)
+     @Test(description = "Проверить правильность результата",  groups = "google.com calculator", priority = 5,
+             dependsOnMethods = "doRequiredExpressionOnCalculator")
      public void validateResultInCalculator(){
          String stepName = "[ИНФОРМАЦИЯ]: Проверить правильность результата";
          System.out.println(stepName);
