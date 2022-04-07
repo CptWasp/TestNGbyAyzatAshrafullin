@@ -47,7 +47,6 @@ public class CommonPage extends AbstractPage {
     //------------------------------------------------------------------------------------------------------------------
     // Кнопка [(] (открывающая скобка)
     private final String CALCULATOR_OPEN_BRACKETS_BUTTON_XPATH = "//div[text()='(' or @aria-label='открывающая скобка']";
-
     //------------------------------------------------------------------------------------------------------------------
     // Кнопка [4]
     private final String CALCULATOR_FOUR_BUTTON_XPATH = "//div[@role='button' and text()='4']";
@@ -63,6 +62,9 @@ public class CommonPage extends AbstractPage {
     //------------------------------------------------------------------------------------------------------------------
     // Кнопка [8]
     private final String CALCULATOR_EIGHT_BUTTON_XPATH = "//div[@role='button' and text()='8']";
+    //------------------------------------------------------------------------------------------------------------------
+    // Поле [Ответ]
+    private final String RESULT_XPATH = "//span[@id='cwos']";
     //------------------------------------------------------------------------------------------------------------------
 
     // end region
@@ -142,9 +144,24 @@ public class CommonPage extends AbstractPage {
         driver.findElement(By.xpath(CALCULATOR_SUMM_BUTTON_XPATH)).click();
         driver.findElement(By.xpath(CALCULATOR_EIGHT_BUTTON_XPATH)).click();
         driver.findElement(By.xpath(CALCULATOR_EQUALS_BUTTON_XPATH)).click();
-
     }
 
+    /**
+     * Проверяем ожидаемый результат с фактическим
+     *
+     * @param expectedResult ожидаемый результат
+     */
+    public void validateResult(int expectedResult){
+        WebElement result = driver.findElement(By.xpath(RESULT_XPATH));
 
+        String errorMessage = String.format("[ОШИБКА]: Ожидаемый результат не совпадает с фактическим, " +
+                "ожидалось - [%s], фактический результат - [%s]", expectedResult, result.getText());
+
+        String errorMessageResultnotFind = String.format("[ОШИБКА]: Ожидаемое поле по локатору [%s] не было найдено",
+                RESULT_XPATH);
+
+        Assert.assertTrue(result.isDisplayed(), errorMessageResultnotFind);
+        Assert.assertTrue(result.getText().equals(String.valueOf(expectedResult)), errorMessage);
+    }
 
 }

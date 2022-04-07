@@ -42,4 +42,15 @@ public class CommonStep extends Hooks {
          commonPage.doRequiredExpression();
      }
 
+     @Test(description = "Проверить правильность результата",  groups = "google.com calculator", priority = 5)
+     public void validateResultInCalculator(){
+         String stepName = "[ИНФОРМАЦИЯ]: Проверить правильность результата";
+         System.out.println(stepName);
+
+         // проверяемое выражение
+         int expectedResult = 4*(5+6)/2+8;
+
+         commonPage.validateResult(expectedResult);
+     }
+
 }
